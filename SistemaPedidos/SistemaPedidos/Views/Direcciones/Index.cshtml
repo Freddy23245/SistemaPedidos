@@ -1,6 +1,6 @@
-﻿
+﻿@model Direccion
 <div class="row">
-    <a class="btn btn-success mb-3">Agregar Nueva Direccion</a>
+    <button class="btn btn-success mb-3" id="OpenModal" data-toggle="modal" data-target="#myModal">Agregar Direccion de entrega</button>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -25,3 +25,65 @@
         </tbody>
     </table>
 </div>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Agregar Direccion de entrega</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-action="Nuevo" asp-controller="Direcciones">
+                    <div class="row">
+                        <input type="hidden" asp-for="IdDireccion" />
+                        <div class="form-group">
+                            <label>Cliente</label>
+                            <select asp-for="IdCliente" asp-items="@(new SelectList(ViewBag.CliDire,"IdCliente","NombreCliente"))" class="form-control">
+                                <option value="">Seleccione Un Cliente</option>
+                            </select>
+                            <span asp-validation-for="IdCliente" class="badge bg-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Lugar de Entrega</label>
+                            <input type="text" asp-for="Nombre" class="form-control" />
+                            <span asp-validation-for="Nombre" class="badge bg-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Fecha</label>
+                            <input type="date" asp-for="Fecha" format="{0:yyyy-MM-dd}" class="form-control" />
+                            <span asp-validation-for="Fecha" class="badge bg-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Horario</label>
+                            <input type="time" asp-for="Horario" class="form-control col-md-6" />
+                            <span asp-validation-for="Horario" class="badge bg-danger"></span>
+                        </div>
+                       
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" data-dismiss="modal">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+    @section Scripts{
+        <script>
+            $(function () {
+                $('#OpenModal').click(function () {
+                    $('#myModal').modal('show');
+                })
+            })
+            $(function () {
+                $('#ModCli').click(function () {
+                    $('#ModalEdit').modal('show');
+                })
+            })
+        </script>
+    }

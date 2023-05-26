@@ -1,0 +1,29 @@
+﻿@model Direccion
+<form method="post" asp-action="Nuevo" asp-controller="Direcciones">
+    <div class="row">
+        <input type="hidden" asp-for="IdDireccion" />
+        <div class="form-group">
+            <label>Cliente</label>
+            <select asp-for="IdCliente" asp-items="@(new SelectList(ViewBag.Customers,"IdCliente","NombreCliente"))" class="form-control"></select>
+            @*<span asp-validation-for="Nombre" class="badge bg-danger"></span>*@
+        </div>
+        <div class="form-group">
+            <label>Lugar de Entrega</label>
+            <input type="text" asp-for="Nombre" class="form-control" />
+            @*<span asp-validation-for="Nombre" class="badge bg-danger"></span>*@
+        </div>
+        <div class="form-group">
+            <label>Fecha</label>
+            <input type="date" asp-for="Fecha"  class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label>Horario</label>
+            <input type="time" asp-for="Horario" class="form-control col-md-6" />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success" data-dismiss="modal">Guardar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+</form>
