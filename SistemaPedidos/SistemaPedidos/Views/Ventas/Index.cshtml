@@ -1,0 +1,23 @@
+﻿<table class="table tabletable-bordered">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Tipo</th>
+            <th>Fecha</th>
+            <th colspan="3">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Ventas venta in ViewBag.Ventas)
+        {
+            <tr>
+                <td>@venta.IdClienteNavigation.Nombre  @venta.IdClienteNavigation.Apellido</td>
+                <td>@venta.IdTipoNavigation.Nombre</td>
+                <td>@venta.Fecha</td>
+                <td><a asp-action="Modificar" asp-controller="Ventas" asp-route-id="@venta.IdVenta" class="btn btn-primary">Ver Detalle</a></td>
+                <td><a asp-action="Modificar" asp-controller="Ventas" asp-route-id="@venta.IdVenta" class="btn btn-primary">Editar</a></td>
+                <td><a asp-action="Eliminar" onclick="return confirm('¿Desea eliminar el Registro?')" asp-controller="Ventas" asp-route-id="@venta.IdVenta" class="btn btn-danger">Eliminar</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

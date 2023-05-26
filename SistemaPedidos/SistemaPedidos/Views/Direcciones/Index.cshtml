@@ -1,0 +1,27 @@
+﻿
+<div class="row">
+    <a class="btn btn-success mb-3">Agregar Nueva Direccion</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Lugar</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Direccion direccion in ViewBag.Direccion)
+            {
+                <tr>
+                    <td>@direccion.IdClienteNavigation.Nombre @direccion.IdClienteNavigation.Apellido</td>
+                    <td>@direccion.Nombre</td>
+                    <td>@direccion.Fecha.ToString("dd/MM/yyyy")</td>
+                    <td>@direccion.Horario</td>
+                    <td><a asp-action="Modificar" asp-controller="Direcciones" asp-route-id="@direccion.IdDireccion" class="btn btn-primary">Editar</a></td>
+                    <td><a asp-action="Eliminar" onclick="return confirm('¿Desea eliminar el Registro?')" asp-controller="Direcciones" asp-route-id="@direccion.IdDireccion" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

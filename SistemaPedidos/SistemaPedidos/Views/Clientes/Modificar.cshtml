@@ -1,0 +1,33 @@
+﻿@model Cliente
+
+<div class="row">
+    <form method="post" asp-action="NuevoCliente" asp-controller="Clientes">
+        <div class="row">
+            <input type="hidden" asp-for="IdCliente" />
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" asp-for="Nombre" class="form-control" />
+                @*<span asp-validation-for="Nombre" class="badge bg-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <label>Apellido</label>
+                <input type="text" asp-for="Apellido" class="form-control col-md-6" />
+            </div>
+            <div class="form-group">
+                <label>Telefono</label>
+                <input type="tel" asp-for="Telefono" class="form-control" />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success" data-dismiss="modal">Guardar Cambios</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </form>
+</div>
+
+
+@section Scripts{
+    <script>
+
+        $('#ModalEdit').modal('show');
+
+    </script>
+    }
