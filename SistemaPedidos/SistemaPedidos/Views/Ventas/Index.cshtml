@@ -6,6 +6,7 @@
             <th>Cliente</th>
             <th>Tipo</th>
             <th>Fecha</th>
+            <th>Total a Pagar</th>
             <th colspan="3">Acciones</th>
         </tr>
     </thead>
@@ -16,7 +17,8 @@
                 <td>@venta.IdClienteNavigation.Nombre  @venta.IdClienteNavigation.Apellido</td>
                 <td>@venta.IdTipoNavigation.Nombre</td>
                 <td>@venta.Fecha</td>
-                <td><a asp-action="Modificar" asp-controller="Ventas" asp-route-id="@venta.IdVenta" class="btn btn-primary">Ver Detalle</a></td>
+                <td>Total</td>
+                <td><a asp-action="VerDetalle" asp-controller="Ventas" asp-route-id="@venta.IdVenta" class="btn btn-primary">Ver Detalle</a></td>
                 <td><a asp-action="Modificar" asp-controller="Ventas" asp-route-id="@venta.IdVenta" class="btn btn-primary">Editar</a></td>
                 <td><a asp-action="Eliminar" onclick="return confirm('¿Desea eliminar el Registro?')" asp-controller="Ventas" asp-route-id="@venta.IdVenta" class="btn btn-danger">Eliminar</a></td>
             </tr>
@@ -29,13 +31,14 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Agregar Cliente</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                
             </div>
             <div class="modal-body">
-                <div class="hstack gap-3">
+                
 
-                    <form method="post" asp-action="NuevoCliente" asp-controller="Clientes">
+                    <form method="post" asp-action="Registrar" asp-controller="Ventas">
                         <div class="row">
                           @*  <input type="hidden" asp-for="IdCliente" />*@
                             <div class="form-group">
@@ -45,13 +48,12 @@
                             </div>
                             <div class="form-group">
                                 <label>Tipo Comprobante</label>
-                                <select asp-for="IdCliente" asp-items="@(new SelectList(ViewBag.Tipos,"IdTipo","Nombre"))" class="form-control"></select>
+                                <select asp-for="IdTipo" asp-items="@(new SelectList(ViewBag.Tipos,"IdTipo","Nombre"))" class="form-control"></select>
                                 <span asp-validation-for="IdTipo" class="badge bg-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label>Fecha</label>
-                                <input type="text" asp-for="Fecha" class="form-control col-md-6" />
-                                <span asp-validation-for="Fecha" class="badge bg-danger"></span>
+                                
+                             
                             </div>
 
                         </div>
@@ -60,31 +62,8 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
-                </div>
-                <form method="post" asp-action="" asp-controller="Clientes">
-                    <div class="row">
-                        @*<input type="hidden" asp-for="IdCliente" />*@
-                        <div class="form-group">
-                            <label>Producto</label>
-                            <select asp-for="IdCliente" asp-items="@(new SelectList(ViewBag.Clientes,"IdCliente","Nombre"))" class="form-control"></select>
-                            <span asp-validation-for="IdCliente" class="badge bg-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Cantidad</label>
-                            <input type="number" min="1" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label>Fecha</label>
-                            <input type="text" asp-for="Fecha" class="form-control col-md-6" />
-                            <span asp-validation-for="Fecha" class="badge bg-danger"></span>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" data-dismiss="modal">Guardar</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </form>
+              
+                
             </div>
 
         </div>
