@@ -20,10 +20,12 @@ namespace SistemaPedidos.Controllers
             ViewBag.Ventas = vent;
             var cust = await context.Clientes.ToListAsync();
             var tipo = await context.Tipos.ToListAsync();
+            var estado = await context.Estados.ToListAsync();
             ViewBag.Tipos = tipo;
             ViewBag.Clientes = cust;
             //Tuple<Ventas, Pedido> Model = new Tuple<Ventas, Pedido>(Venta, new Pedido());
             return View(xvent);
         }
+
     }
 }
