@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Cristian\\Desktop\\Pedidos\\SistemaPedidos\\SistemaPedidos\\wwwroot\\js\\TraerProductos.js",
+      "PackagePath": "staticwebassets\\js\\TraerProductos.js"
+    },
+    {
       "Id": "C:\\Users\\Cristian\\Desktop\\Pedidos\\SistemaPedidos\\SistemaPedidos\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

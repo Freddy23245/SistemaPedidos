@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ve16U5kp3puP1o6qdz+Hm0BcJHTQkWfiMRi49ArqOzc=",
+  "Hash": "1CVCwO7W9A5hRBP8vdU7GmkxImyoFuiSrZPXRmqAn8Y=",
   "Source": "SistemaPedidos",
   "BasePath": "_content/SistemaPedidos",
   "Mode": "Default",
@@ -100,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\Cristian\\Desktop\\Pedidos\\SistemaPedidos\\SistemaPedidos\\wwwroot\\js\\TraerProductos.js",
+      "SourceId": "SistemaPedidos",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Cristian\\Desktop\\Pedidos\\SistemaPedidos\\SistemaPedidos\\wwwroot\\",
+      "BasePath": "_content/SistemaPedidos",
+      "RelativePath": "js/TraerProductos.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\TraerProductos.js"
     },
     {
       "Identity": "C:\\Users\\Cristian\\Desktop\\Pedidos\\SistemaPedidos\\SistemaPedidos\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

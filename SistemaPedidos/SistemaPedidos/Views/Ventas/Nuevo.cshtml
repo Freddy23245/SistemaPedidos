@@ -1,0 +1,67 @@
+﻿@model Tuple<Ventas,Pedido>
+
+<form method="post" asp-action="Registrar" asp-controller="Ventas">
+    <div class="row">
+        <input type="hidden" asp-for="Item1.IdVenta" />
+
+        <div class="form-group">
+            <label>Cliente</label>
+            <select asp-for="Item1.IdCliente" asp-items="@(new SelectList(ViewBag.Clientes,"IdCliente","Nombre"))" class="form-control">
+                <option value="">Seleccione un Cliente...</option>
+            </select>
+            <span asp-validation-for="Item1.IdCliente" class="badge bg-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Tipo Comprobante</label>
+            <select asp-for="Item1.IdTipo" asp-items="@(new SelectList(ViewBag.Tipos,"IdTipo","Nombre"))" class="form-control">
+                <option value="">Seleccione un Tipo de Comprobante...</option>
+            </select>
+            <span asp-validation-for="Item1.IdTipo" class="badge bg-danger"></span>
+        </div>
+        <div class="form-group">
+        </div>
+
+    </div>
+
+@*    <button type="submit" class="btn btn-success" data-dismiss="modal">Guardar</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
+
+</form>
+<hr />
+<form method="post" asp-action="Registrar" asp-controller="Ventas">
+    <div class="row">
+        <input type="hidden" asp-for="Item2.IdVenta" />
+        <div class="form-group">
+            <label>Producto</label>
+            <select asp-for="Item2.IdProducto" id="select-productos" asp-items="@(new SelectList(ViewBag.Productos,"IdProducto","NombreProducto"))" class="form-control">
+                <option value="">Seleccione un Producto...</option>
+            </select>
+            <span asp-validation-for="Item2.IdProducto" class="badge bg-danger"></span>
+        </div>
+     
+        <div class="form-group col-md-6">
+            <label>Cantidad</label>
+            <input type="number" class="form-control" asp-for="Item2.Cantidad" />
+        </div>
+        <div class="form-group col-md-6">
+            <label>Stock</label>
+            <input type="text" id="StockProd" placeholder="Stock" class="form-control" disabled/>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Precio Unitario</label>
+            <input type="text" id="PrecioProd" asp-for="Item2.PrecioUnitario"  class="form-control" disabled/>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <label>Estado</label>
+        <select asp-for="Item2.IdEstado" asp-items="@(new SelectList(ViewBag.Estado,"IdEstado","Nombre"))" class="form-control"></select>
+        <span asp-validation-for="Item2.IdEstado" class="badge bg-danger mb-3"></span>
+    </div>
+    <br />
+        <button type="submit" class="btn btn-success" data-dismiss="modal">Guardar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+   
+
+</form>
+
