@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SistemaPedidos.Models;
 
@@ -7,6 +8,7 @@ namespace SistemaPedidos.Controllers
     public class VentasController : Controller
     {
         PedidosContext context;
+        Models.Response res = new Models.Response();
         public VentasController(PedidosContext _context)
         {
             context = _context;
@@ -42,20 +44,37 @@ namespace SistemaPedidos.Controllers
             return View(Model);
         }
 
-        public async Task<IActionResult> Registrar( int? id)
+        public async Task<IActionResult> SetVentas([Bind(Prefix = "Item1")] Ventas venta1)
         {
-            var vent = await context.Venta.Where(x=> x.IdVenta == venta.IdVenta).AnyAsync();
-
-            if (!vent)
-                context.Venta.Add(venta);
+            var _venta = await context.Venta.FindAsync(venta1.IdVenta);
+            if (_venta == null)
+            {
+                context.Add(venta1);
+                await context.SaveChangesAsync();
+            }
             else
             {
-                context.Venta.Attach(venta);
-                context.Entry(venta).State = EntityState.Modified;
+                _venta.IdCliente = venta1.IdCliente;
+                _venta.IdTipo = venta1.IdTipo;
+                await context.SaveChangesAsync();
             }
-            await context.SaveChangesAsync();
-            return RedirectToAction("Nuevo.cshtml", "Pedidos");
+
+            res.resultado = venta1.IdVenta;
+            res.estado = true;
+            return Json(res);
         }
+        public async Task<IActionResult> SetPedidos([Bind(Prefix = "Item2")] Pedido pedido)
+        {
+            var Ped = await context.Pedidos.Where(x => x.IdPedido == pedido.IdPedido).AnyAsync();
+
+            context.Pedidos.Add(pedido);
+
+            await context.SaveChangesAsync();
+            res.resultado = pedido;
+            res.mensaje = "Porducto Agregado Correctamente";
+            return Json(res);
+        }
+
         [HttpGet]
         public async Task<IActionResult>TraerProducto(int id)
         {

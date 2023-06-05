@@ -1,6 +1,6 @@
 ﻿@model Tuple<Ventas,Pedido>
 
-<form method="post" asp-action="Registrar" asp-controller="Ventas">
+<form method="post" asp-action="SetVentas" asp-controller="Ventas" id="SetVentas">
     <div class="row">
         <input type="hidden" asp-for="Item1.IdVenta" />
 
@@ -28,7 +28,7 @@
 
 </form>
 <hr />
-<form method="post" asp-action="Registrar" asp-controller="Ventas">
+<form method="post" asp-action="SetPedidos" asp-controller="Ventas" id="SetPedidos">
     <div class="row">
         <input type="hidden" asp-for="Item2.IdVenta" />
         <div class="form-group">
@@ -42,6 +42,7 @@
         <div class="form-group col-md-6">
             <label>Cantidad</label>
             <input type="number" class="form-control" asp-for="Item2.Cantidad" />
+            <span asp-validation-for="Item2.IdProducto" class="badge bg-danger"></span>
         </div>
         <div class="form-group col-md-6">
             <label>Stock</label>
@@ -49,7 +50,8 @@
         </div>
         <div class="form-group col-md-6">
             <label>Precio Unitario</label>
-            <input type="text" id="PrecioProd" asp-for="Item2.PrecioUnitario"  class="form-control" disabled/>
+            <input type="text" id="PrecioProd" asp-for="Item2.PrecioUnitario"  class="form-control" />
+            <span asp-validation-for="Item2.IdProducto" class="badge bg-danger"></span>
         </div>
 
     </div>
@@ -57,10 +59,11 @@
         <label>Estado</label>
         <select asp-for="Item2.IdEstado" asp-items="@(new SelectList(ViewBag.Estado,"IdEstado","Nombre"))" class="form-control"></select>
         <span asp-validation-for="Item2.IdEstado" class="badge bg-danger mb-3"></span>
+        <span asp-validation-for="Item2.IdProducto" class="badge bg-danger"></span>
     </div>
     <br />
-        <button type="submit" class="btn btn-success" data-dismiss="modal">Guardar</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <button type="button" class="btn btn-secondary">Close</button>
    
 
 </form>
