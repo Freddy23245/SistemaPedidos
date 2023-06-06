@@ -23,7 +23,7 @@
 
     </div>
 
-@*    <button type="submit" class="btn btn-success" data-dismiss="modal">Guardar</button>
+    @*    <button type="submit" class="btn btn-success" data-dismiss="modal">Guardar</button>
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
 
 </form>
@@ -38,7 +38,7 @@
             </select>
             <span asp-validation-for="Item2.IdProducto" class="badge bg-danger"></span>
         </div>
-     
+
         <div class="form-group col-md-6">
             <label>Cantidad</label>
             <input type="number" class="form-control" asp-for="Item2.Cantidad" />
@@ -46,11 +46,11 @@
         </div>
         <div class="form-group col-md-6">
             <label>Stock</label>
-            <input type="text" id="StockProd" placeholder="Stock" class="form-control" disabled/>
+            <input type="text" id="StockProd" placeholder="Stock" class="form-control" disabled />
         </div>
         <div class="form-group col-md-6">
             <label>Precio Unitario</label>
-            <input type="text" id="PrecioProd" asp-for="Item2.PrecioUnitario"  class="form-control" />
+            <input type="text" id="PrecioProd" asp-for="Item2.PrecioUnitario" class="form-control" />
             <span asp-validation-for="Item2.IdProducto" class="badge bg-danger"></span>
         </div>
 
@@ -62,9 +62,38 @@
         <span asp-validation-for="Item2.IdProducto" class="badge bg-danger"></span>
     </div>
     <br />
-        <button type="submit" class="btn btn-success">Guardar</button>
-        <button type="button" class="btn btn-secondary">Close</button>
-   
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <button type="button" class="btn btn-secondary">Close</button>
+
 
 </form>
+@if (ViewBag.Pedido != null)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Descripcion</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Total</th>
+                <th colspan="1">Accion</th>
+            </tr>
+        </thead>
+        <tbody>
 
+            @foreach (Pedido pedido in ViewBag.Pedido)
+            {
+                <tr>
+                    <td> @pedido.IdProductoNavigation.Nombre</td>
+                    <td>@pedido.IdProductoNavigation.Descripcion</td>
+                    <td>@pedido.Cantidad</td>
+                    <td>@pedido.PrecioUnitario</td>
+                    <td>@Math.Round(pedido.PrecioUnitario * pedido.Cantidad)</td>
+                    <td><a asp-action="EliminarPedido" onclick="return confirm('¿Desea eliminar el Registro?')" asp-controller="Ventas" asp-route-id="@pedido.IdPedido" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}

@@ -15,7 +15,7 @@ $(document).on('submit', '#SetPedidos', function (e) {
         data: $('#SetVentas').serialize(),
         success: function (data) {
             if (data.estado) {
-                $('#SetVentas  #Item1_IdVenta').val(data.resultado);
+                $('#SetVentas  #Item1_IdVenta').val(data.resultado);//Se establece la variable resultado que devuelve el id de la venta
                 $('#SetPedidos  #Item2_IdVenta').val(data.resultado);
 
                 $.ajax({

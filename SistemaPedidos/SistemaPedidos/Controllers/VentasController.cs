@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SistemaPedidos.Models;
-
+using System.Data.SqlClient;
 namespace SistemaPedidos.Controllers
 {
     public class VentasController : Controller
@@ -16,7 +16,7 @@ namespace SistemaPedidos.Controllers
         public async Task<IActionResult> Index()
         {
            
-            var vent = await context.Venta.Include(x => x.IdClienteNavigation).Include(t=>t.IdTipoNavigation).ToListAsync();
+            var vent = await context.Venta.Include(r=>r.Pedidos).Include(x => x.IdClienteNavigation).Include(t=>t.IdTipoNavigation).ToListAsync();
             Ventas xvent = new Ventas();          
             ViewBag.Ventas = vent;
         
@@ -25,8 +25,10 @@ namespace SistemaPedidos.Controllers
         }
         [BindProperty]
         public Ventas venta { get; set; }
+  
         public async Task<IActionResult> Nuevo(int? id)
         {
+            var valor = id;
             var _vent = await context.Venta.FindAsync(id);
             var Venta = new Ventas();
             if (_vent != null)
@@ -39,18 +41,22 @@ namespace SistemaPedidos.Controllers
             ViewBag.Clientes = cust;
             ViewBag.Estado = await context.Estados.ToListAsync();
             ViewBag.Productos = await context.Productos.Select(x => new { x.IdProducto, NombreProducto = x.Nombre + " - " + x.IdMarcaNavigation.Nombre }).ToListAsync();
+            if(id != null)
+                ViewBag.Pedido = await context.Pedidos.Include(p => p.IdProductoNavigation).Where(x => x.IdVenta == id.Value).ToListAsync();
             Tuple<Ventas, Pedido> Model = new Tuple<Ventas, Pedido>(Venta, new Pedido());
-
+           
             return View(Model);
         }
 
         public async Task<IActionResult> SetVentas([Bind(Prefix = "Item1")] Ventas venta1)
         {
             var _venta = await context.Venta.FindAsync(venta1.IdVenta);
+         
             if (_venta == null)
             {
                 context.Add(venta1);
                 await context.SaveChangesAsync();
+          
             }
             else
             {
@@ -66,16 +72,19 @@ namespace SistemaPedidos.Controllers
         public async Task<IActionResult> SetPedidos([Bind(Prefix = "Item2")] Pedido pedido)
         {
             var Ped = await context.Pedidos.Where(x => x.IdPedido == pedido.IdPedido).AnyAsync();
-
+            var product = await context.Productos.FirstOrDefaultAsync(p => p.IdProducto == pedido.IdProducto);
+            if(product != null)
+                product.Stock -= pedido.Cantidad;
             context.Pedidos.Add(pedido);
-
             await context.SaveChangesAsync();
+           
             res.resultado = pedido;
             res.mensaje = "Porducto Agregado Correctamente";
-            return Json(res);
+            //return Json(res);
+            return Redirect("/Ventas/");
         }
 
-        [HttpGet]
+       [HttpGet]
         public async Task<IActionResult>TraerProducto(int id)
         {
             var producto = await context.Productos.FirstOrDefaultAsync(p => p.IdProducto == id);
@@ -97,6 +106,23 @@ namespace SistemaPedidos.Controllers
             else
                 context.Venta.Remove(VentDelete);
             context.SaveChanges();
+            return Redirect("/Ventas/");
+        }
+      public  Pedido pedido1 { get; set; }
+        public async Task<IActionResult> EliminarPedido(int id)
+        {
+            var detallePedido = await context.Pedidos.FirstOrDefaultAsync(dv => dv.IdPedido == id);
+          
+            var product = await context.Productos.FirstOrDefaultAsync(p => p.IdProducto == detallePedido.IdProducto);
+            if (product != null)
+            {
+                product.Stock += detallePedido.Cantidad;
+                context.Pedidos.Remove(detallePedido);
+                
+                context.SaveChanges();
+
+            }
+
             return Redirect("/Ventas/");
         }
 
