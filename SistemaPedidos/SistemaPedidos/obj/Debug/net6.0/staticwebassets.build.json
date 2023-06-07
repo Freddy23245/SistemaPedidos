@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1CVCwO7W9A5hRBP8vdU7GmkxImyoFuiSrZPXRmqAn8Y=",
+  "Hash": "lFn1t4B+dQNrAV8tmRg7C+yRG2pKNHAeHYSfMUVtpRw=",
   "Source": "SistemaPedidos",
   "BasePath": "_content/SistemaPedidos",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Cristian\\Desktop\\Pedidos\\SistemaPedidos\\SistemaPedidos\\wwwroot\\js\\EliminarDetalle.js",
+      "SourceId": "SistemaPedidos",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Cristian\\Desktop\\Pedidos\\SistemaPedidos\\SistemaPedidos\\wwwroot\\",
+      "BasePath": "_content/SistemaPedidos",
+      "RelativePath": "js/EliminarDetalle.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\EliminarDetalle.js"
     },
     {
       "Identity": "C:\\Users\\Cristian\\Desktop\\Pedidos\\SistemaPedidos\\SistemaPedidos\\wwwroot\\js\\site.js",

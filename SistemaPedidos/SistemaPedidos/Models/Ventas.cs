@@ -12,7 +12,7 @@ public partial class Ventas
 
     public int IdTipo { get; set; }
     [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-    public DateTime? Fecha { get; set; }
+    public DateTime Fecha { get; set; }
 
     public virtual Cliente IdClienteNavigation { get; set; } = null!;
 

@@ -80,8 +80,8 @@ namespace SistemaPedidos.Controllers
            
             res.resultado = pedido;
             res.mensaje = "Porducto Agregado Correctamente";
-            //return Json(res);
-            return Redirect("/Ventas/");
+            return Json(res);
+            //return View("Index");
         }
 
        [HttpGet]
@@ -94,6 +94,28 @@ namespace SistemaPedidos.Controllers
             {
                 return Ok(producto);
             }
+        }
+       
+        public async Task<IActionResult> Modificar(int? id)
+        {
+            var valor = id;
+            var _vent = await context.Venta.FindAsync(id);
+            var Venta = new Ventas();
+            if (_vent != null)
+            {
+                Venta = _vent;
+            }
+            var cust = await context.Clientes.ToListAsync();
+            var tipo = await context.Tipos.ToListAsync();
+            ViewBag.Tipos = tipo;
+            ViewBag.Clientes = cust;
+            ViewBag.Estado = await context.Estados.ToListAsync();
+            ViewBag.Productos = await context.Productos.Select(x => new { x.IdProducto, NombreProducto = x.Nombre + " - " + x.IdMarcaNavigation.Nombre }).ToListAsync();
+            if (id != null)
+                ViewBag.Pedido = await context.Pedidos.Include(p => p.IdProductoNavigation).Where(x => x.IdVenta == id.Value).ToListAsync();
+            Tuple<Ventas, Pedido> Model = new Tuple<Ventas, Pedido>(Venta, new Pedido());
+
+            return View(Model);
         }
         public async Task<IActionResult> Eliminar(int id)
         {
@@ -122,8 +144,7 @@ namespace SistemaPedidos.Controllers
                 context.SaveChanges();
 
             }
-
-            return Redirect("/Ventas/");
+            return Redirect("/Ventas/Modificar/"+ detallePedido.IdVenta);
         }
 
     }
