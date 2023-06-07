@@ -73,15 +73,25 @@ namespace SistemaPedidos.Controllers
         {
             var Ped = await context.Pedidos.Where(x => x.IdPedido == pedido.IdPedido).AnyAsync();
             var product = await context.Productos.FirstOrDefaultAsync(p => p.IdProducto == pedido.IdProducto);
+           
             if(product != null)
-                product.Stock -= pedido.Cantidad;
+            {
+                pedido.Total = pedido.PrecioUnitario * pedido.Cantidad;
+               product.Stock -= pedido.Cantidad;
+            }
             context.Pedidos.Add(pedido);
             await context.SaveChangesAsync();
            
             res.resultado = pedido;
             res.mensaje = "Porducto Agregado Correctamente";
             return Json(res);
-            //return View("Index");
+           
+           
+        }
+        public async Task<IActionResult> Redireccion(int? id)
+        {
+            var detallePedido = await context.Pedidos.FirstOrDefaultAsync(dv => dv.IdPedido == id);
+            return RedirectToAction("/Ventas/Modificar/" + detallePedido.IdVenta);
         }
 
        [HttpGet]
@@ -120,8 +130,8 @@ namespace SistemaPedidos.Controllers
         public async Task<IActionResult> Eliminar(int id)
         {
             var VentDelete = await context.Venta.FindAsync(id);
-
-            if (VentDelete == null)
+            var detVent = await context.Pedidos.Where(x => x.IdVenta == id).AnyAsync();
+            if (VentDelete == null || detVent )
             {
                 return StatusCode(404);
             }
