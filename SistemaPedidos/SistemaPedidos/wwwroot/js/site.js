@@ -24,7 +24,8 @@ $(document).on('submit', '#SetPedidos', function (e) {
                     data: $('#SetPedidos').serialize(),
                     success: function (data) {
                         console.log(data);
-                 
+                        window.location.href = "/Ventas/Modificar/" + data.resultado;
+           
                     }
                 });
             }

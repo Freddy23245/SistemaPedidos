@@ -39,7 +39,7 @@ namespace SistemaPedidos.Controllers
             var tipo = await context.Tipos.ToListAsync();
             ViewBag.Tipos = tipo;
             ViewBag.Clientes = cust;
-            ViewBag.Estado = await context.Estados.ToListAsync();
+
             ViewBag.Productos = await context.Productos.Select(x => new { x.IdProducto, NombreProducto = x.Nombre + " - " + x.IdMarcaNavigation.Nombre }).ToListAsync();
             if(id != null)
                 ViewBag.Pedido = await context.Pedidos.Include(p => p.IdProductoNavigation).Where(x => x.IdVenta == id.Value).ToListAsync();
@@ -119,7 +119,7 @@ namespace SistemaPedidos.Controllers
             var tipo = await context.Tipos.ToListAsync();
             ViewBag.Tipos = tipo;
             ViewBag.Clientes = cust;
-            ViewBag.Estado = await context.Estados.ToListAsync();
+
             ViewBag.Productos = await context.Productos.Select(x => new { x.IdProducto, NombreProducto = x.Nombre + " - " + x.IdMarcaNavigation.Nombre }).ToListAsync();
             if (id != null)
                 ViewBag.Pedido = await context.Pedidos.Include(p => p.IdProductoNavigation).Where(x => x.IdVenta == id.Value).ToListAsync();

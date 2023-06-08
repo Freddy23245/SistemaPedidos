@@ -19,7 +19,7 @@
                 <td>@venta.Fecha.ToString("dd/MM/yyyy")</td>
                 <td>$@Math.Round(@venta.Pedidos.Select(x=> (x.Cantidad * x.PrecioUnitario)).DefaultIfEmpty(0).Sum(),2)</td>
                 <td><a asp-action="Modificar" asp-controller="Ventas" asp-route-id="@venta.IdVenta" class="btn btn-primary">Ver Detalle</a></td>
-                <td><a asp-action="Mod" asp-controller="Ventas" asp-route-id="@venta.IdVenta" class="btn btn-primary">Editar</a></td>
+               @* <td><a asp-action="Mod" asp-controller="Ventas" asp-route-id="@venta.IdVenta" class="btn btn-primary">Editar</a></td>*@
                 <td><a asp-action="Eliminar" onclick="return confirm('¿Desea eliminar el Registro?')" asp-controller="Ventas" asp-route-id="@venta.IdVenta" class="btn btn-danger">Eliminar</a></td>
             </tr>
         }

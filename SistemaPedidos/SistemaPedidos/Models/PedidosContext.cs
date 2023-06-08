@@ -19,8 +19,6 @@ public partial class PedidosContext : DbContext
 
     public virtual DbSet<Direccion> Direccions { get; set; }
 
-    public virtual DbSet<Estado> Estados { get; set; }
-
     public virtual DbSet<Marca> Marcas { get; set; }
 
     public virtual DbSet<Pedido> Pedidos { get; set; }
@@ -81,19 +79,6 @@ public partial class PedidosContext : DbContext
                 .HasConstraintName("FK_Direccion_Cliente");
         });
 
-        modelBuilder.Entity<Estado>(entity =>
-        {
-            entity.HasKey(e => e.IdEstado).HasName("PK__Estado__86989FB2941946E0");
-
-            entity.ToTable("Estado");
-
-            entity.Property(e => e.IdEstado).HasColumnName("id_estado");
-            entity.Property(e => e.Nombre)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("nombre");
-        });
-
         modelBuilder.Entity<Marca>(entity =>
         {
             entity.HasKey(e => e.IdMarca).HasName("PK__Marca__7E43E99EA0F57B89");
@@ -119,7 +104,6 @@ public partial class PedidosContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("date")
                 .HasColumnName("fecha");
-            entity.Property(e => e.IdEstado).HasColumnName("id_estado");
             entity.Property(e => e.IdProducto).HasColumnName("id_producto");
             entity.Property(e => e.IdVenta).HasColumnName("id_venta");
             entity.Property(e => e.PrecioUnitario)
@@ -128,11 +112,6 @@ public partial class PedidosContext : DbContext
             entity.Property(e => e.Total)
                 .HasColumnType("decimal(12, 2)")
                 .HasColumnName("total");
-
-            entity.HasOne(d => d.IdEstadoNavigation).WithMany(p => p.Pedidos)
-                .HasForeignKey(d => d.IdEstado)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Pedido_Estado");
 
             entity.HasOne(d => d.IdProductoNavigation).WithMany(p => p.Pedidos)
                 .HasForeignKey(d => d.IdProducto)

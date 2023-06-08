@@ -6,13 +6,12 @@ namespace SistemaPedidos.Models;
 
 public partial class Pedido
 {
+    [Required]
     public int IdPedido { get; set; }
     [Required]
     public int IdVenta { get; set; }
     [Required]
     public int IdProducto { get; set; }
-    [Required]
-    public int IdEstado { get; set; }
     [Required]
     public int Cantidad { get; set; }
     [Required]
@@ -21,8 +20,6 @@ public partial class Pedido
     public DateTime? Fecha { get; set; }
 
     public decimal? Total { get; set; }
-
-    public virtual Estado IdEstadoNavigation { get; set; } = null!;
 
     public virtual Producto IdProductoNavigation { get; set; } = null!;
 

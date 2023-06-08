@@ -55,12 +55,12 @@
         </div>
 
     </div>
-    <div class="form-group">
+@*    <div class="form-group">
         <label>Estado</label>
         <select asp-for="Item2.IdEstado" asp-items="@(new SelectList(ViewBag.Estado,"IdEstado","Nombre"))" class="form-control"></select>
         <span asp-validation-for="Item2.IdEstado" class="badge bg-danger mb-3"></span>
         <span asp-validation-for="Item2.IdProducto" class="badge bg-danger"></span>
-    </div>
+    </div>*@
     <br />
     <button type="submit"  class="btn btn-success">Guardar</button>
     <a href="/Ventas/" class="btn btn-secondary">Close</a>
