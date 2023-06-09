@@ -19,7 +19,7 @@ namespace SistemaPedidos.Controllers
             var cusDir = await context.Clientes.Select(x => new {x.IdCliente,NombreCliente = x.Nombre +"  "+x.Apellido}).ToListAsync();
 
             var id = 0;
-           var dir = await context.Direccions.Include(x => x.IdClienteNavigation).ToListAsync();
+           var dir = await context.Direccions.Include(x => x.IdClienteNavigation).OrderBy(z=>z.Horario).ToListAsync();
             Direccion direc = new Direccion();
             ViewBag.Direccion = dir;
             ViewBag.CliDire = cusDir;

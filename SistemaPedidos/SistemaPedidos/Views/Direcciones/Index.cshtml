@@ -17,7 +17,7 @@
                     <td>@direccion.IdClienteNavigation.Nombre @direccion.IdClienteNavigation.Apellido</td>
                     <td>@direccion.Nombre</td>
                     <td>@direccion.Fecha.ToString("dd/MM/yyyy")</td>
-                    <td>@direccion.Horario</td>
+                    <td>@direccion.Horario.ToString(@"hh\:mm")</td>
                     <td><a asp-action="Modificar" asp-controller="Direcciones" asp-route-id="@direccion.IdDireccion" class="btn btn-primary">Editar</a></td>
                     <td><a asp-action="Eliminar" onclick="return confirm('¿Desea eliminar el Registro?')" asp-controller="Direcciones" asp-route-id="@direccion.IdDireccion" class="btn btn-danger">Eliminar</a></td>
                 </tr>

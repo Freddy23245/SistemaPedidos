@@ -84,15 +84,12 @@ namespace SistemaPedidos.Controllers
            
             res.resultado = pedido;
             res.mensaje = "Porducto Agregado Correctamente";
-            return Json(res);
+            res.res2 = pedido.IdVenta;// cree un nuevo atributo a la clase Response asi me permite pasarle el id y llamarlo en el return
+            return Json(res.res2); //aca en vez de retornar todos los datos Json retornaria solo el id de venta asi me lleva al formulario Modificar donde puedo seguir agregando items
            
            
         }
-        public async Task<IActionResult> Redireccion(int? id)
-        {
-            var detallePedido = await context.Pedidos.FirstOrDefaultAsync(dv => dv.IdPedido == id);
-            return RedirectToAction("/Ventas/Modificar/" + detallePedido.IdVenta);
-        }
+   
 
        [HttpGet]
         public async Task<IActionResult>TraerProducto(int id)

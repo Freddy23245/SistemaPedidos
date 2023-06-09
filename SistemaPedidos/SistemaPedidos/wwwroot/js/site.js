@@ -23,8 +23,8 @@ $(document).on('submit', '#SetPedidos', function (e) {
                     url: '/Ventas/SetPedidos/',
                     data: $('#SetPedidos').serialize(),
                     success: function (data) {
-                        console.log(data);
-                        window.location.href = "/Ventas/Modificar/" + data.resultado;
+                        console.log(data); //el valor de data ya no traeria todos los datos si no el id de la venta que retornaria la funcion SetPedidos asi me llevaria al otro formulario
+                       window.location.href = "/Ventas/Modificar/" + data;
            
                     }
                 });

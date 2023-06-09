@@ -2,7 +2,8 @@
 
 <form method="post" asp-action="SetVentas" asp-controller="Ventas" id="SetVentas">
     <div class="row">
-        <input type="hidden" asp-for="Item1.IdVenta" />
+        <input type="hidden"  asp-for="Item1.IdVenta" />
+        
 
         <div class="form-group">
             <label>Cliente</label>
@@ -55,14 +56,10 @@
         </div>
 
     </div>
-@*    <div class="form-group">
-        <label>Estado</label>
-        <select asp-for="Item2.IdEstado" asp-items="@(new SelectList(ViewBag.Estado,"IdEstado","Nombre"))" class="form-control"></select>
-        <span asp-validation-for="Item2.IdEstado" class="badge bg-danger mb-3"></span>
-        <span asp-validation-for="Item2.IdProducto" class="badge bg-danger"></span>
-    </div>*@
+
     <br />
-    <button type="submit"  class="btn btn-success">Guardar</button>
+
+    <button type="submit" id="btn-Enviar"  class="btn btn-success">Guardar</button>
     <a href="/Ventas/" class="btn btn-secondary">Close</a>
 
     <input type="hidden" asp-for="Item2.Total" value="" />
@@ -85,6 +82,7 @@
             @foreach (Pedido pedido in ViewBag.Pedido)
             {
                 <tr>
+             
                     <td> @pedido.IdProductoNavigation.Nombre</td>
                     <td>@pedido.IdProductoNavigation.Descripcion</td>
                     <td>@pedido.Cantidad</td>
