@@ -7,19 +7,24 @@ namespace SistemaPedidos.Models;
 public partial class Producto
 {
     public int IdProducto { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Marca Requerida")]
     public int IdMarca { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Nombre Requerido")]
+    [StringLength(50)]
     public string Nombre { get; set; } = null!;
-    [Required]
+    [Required(ErrorMessage = "Color Requerido")]
+    [StringLength(50)]
     public string Color { get; set; } = null!;
-    [Required]
+    [Required(ErrorMessage = "Modelo Requerido")]
+    [StringLength(50)]
     public string Modelo { get; set; } = null!;
-    [Required]
+    
+    [Required(ErrorMessage = "Descripción Requerida")]
+    [StringLength(200,MinimumLength =10)]
     public string? Descripcion { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Precio Requerido")]
     public decimal Precio { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Stock Requerido")]
     public int? Stock { get; set; }
 
     public byte[]? Imagen { get; set; }

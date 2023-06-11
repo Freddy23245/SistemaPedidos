@@ -6,15 +6,15 @@ namespace SistemaPedidos.Models;
 
 public partial class Pedido
 {
-    [Required]
+
     public int IdPedido { get; set; }
-    [Required]
+   
     public int IdVenta { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Producto Requerido")]
     public int IdProducto { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Cantidad Requerida")]
     public int Cantidad { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Precio Unitario Requerido")]
     public decimal PrecioUnitario { get; set; }
 
     public DateTime? Fecha { get; set; }

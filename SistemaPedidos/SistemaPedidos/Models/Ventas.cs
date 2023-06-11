@@ -7,9 +7,9 @@ namespace SistemaPedidos.Models;
 public partial class Ventas
 {
     public int IdVenta { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Cliente Requerido")]
     public int IdCliente { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Tipo de Comprobante Requerido")]
     public int IdTipo { get; set; }
     [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
     public DateTime Fecha { get; set; }

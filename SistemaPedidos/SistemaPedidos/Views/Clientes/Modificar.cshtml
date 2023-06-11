@@ -1,35 +1,39 @@
 ﻿@model Cliente
+<div class="container">
 
-<div class="row">
-    <form method="post" asp-action="NuevoCliente" asp-controller="Clientes">
-        <div class="row">
-            <input type="hidden" asp-for="IdCliente" />
-            <div class="form-group">
-                <label>Nombre</label>
-                <input type="text" asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="badge bg-danger"></span>
+    <div class="row">
+        <form method="post" asp-action="NuevoCliente" asp-controller="Clientes">
+            <div class="row">
+                <input type="hidden" asp-for="IdCliente" />
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="badge bg-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Apellido</label>
+                    <input type="text" asp-for="Apellido" class="form-control col-md-6" />
+                    <span asp-validation-for="Apellido" class="badge bg-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Telefono</label>
+                    <input type="tel" asp-for="Telefono" class="form-control" />
+                    <span asp-validation-for="Telefono" class="badge bg-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Apellido</label>
-                <input type="text" asp-for="Apellido" class="form-control col-md-6" />
-                <span asp-validation-for="Apellido" class="badge bg-danger"></span>
-            </div>
-            <div class="form-group">
-                <label>Telefono</label>
-                <input type="tel" asp-for="Telefono" class="form-control" />
-                <span asp-validation-for="Telefono" class="badge bg-danger"></span>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-success" data-dismiss="modal">Guardar Cambios</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    </form>
-</div>
+            <br />
+            <button type="submit" class="btn btn-success" data-dismiss="modal">Guardar Cambios</button>
+            <a type="button" class="btn btn-secondary" data-dismiss="modal" href="/Clientes/">Cerrar</a>
+        </form>
+    </div>
 
 
-@section Scripts{
-    <script>
+    @section Scripts{
+        <script>
 
-        $('#ModalEdit').modal('show');
+            $('#ModalEdit').modal('show');
 
-    </script>
+        </script>
     }
+
+</div>

@@ -10,14 +10,14 @@
             <select asp-for="Item1.IdCliente" asp-items="@(new SelectList(ViewBag.Clientes,"IdCliente","Nombre"))" class="form-control">
                 <option value="">Seleccione un Cliente...</option>
             </select>
-            <span asp-validation-for="Item1.IdCliente" class="badge bg-danger"></span>
+            <span asp-validation-for="Item1.IdCliente" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label>Tipo Comprobante</label>
             <select asp-for="Item1.IdTipo" asp-items="@(new SelectList(ViewBag.Tipos,"IdTipo","Nombre"))" class="form-control">
                 <option value="">Seleccione un Tipo de Comprobante...</option>
             </select>
-            <span asp-validation-for="Item1.IdTipo" class="badge bg-danger"></span>
+            <span asp-validation-for="Item1.IdTipo" class="text-danger"></span>
         </div>
         <div class="form-group">
         </div>
@@ -37,13 +37,13 @@
             <select asp-for="Item2.IdProducto" id="select-productos" asp-items="@(new SelectList(ViewBag.Productos,"IdProducto","NombreProducto"))" class="form-control">
                 <option value="">Seleccione un Producto...</option>
             </select>
-            <span asp-validation-for="Item2.IdProducto" class="badge bg-danger"></span>
+            <span asp-validation-for="Item2.IdProducto" class="text-danger"></span>
         </div>
 
         <div class="form-group col-md-6">
             <label>Cantidad</label>
             <input type="number" class="form-control" asp-for="Item2.Cantidad" min="0" />
-            <span asp-validation-for="Item2.IdProducto" class="badge bg-danger"></span>
+            <span asp-validation-for="Item2.Cantidad" class="text-danger"></span>
         </div>
         <div class="form-group col-md-6">
             <label>Stock</label>
@@ -52,7 +52,7 @@
         <div class="form-group col-md-6">
             <label>Precio Unitario</label>
             <input type="text" id="PrecioProd" asp-for="Item2.PrecioUnitario" class="form-control" />
-            <span asp-validation-for="Item2.IdProducto" class="badge bg-danger"></span>
+            <span asp-validation-for="Item2.PrecioUnitario" class="text-danger"></span>
         </div>
 
     </div>
@@ -60,7 +60,7 @@
     <br />
 
     <button type="submit" id="btn-Enviar"  class="btn btn-success">Guardar</button>
-    <a href="/Ventas/" class="btn btn-secondary">Close</a>
+    <a href="/Ventas/" class="btn btn-secondary">Cerrar</a>
 
     <input type="hidden" asp-for="Item2.Total" value="" />
 </form>
