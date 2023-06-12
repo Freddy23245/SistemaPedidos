@@ -153,6 +153,21 @@ namespace SistemaPedidos.Controllers
             }
             return Redirect("/Ventas/Modificar/"+ detallePedido.IdVenta);
         }
+        public Ventas vent { get; set; }
+        public async Task<IActionResult> Pagado(int id)
+        {
+            var ventaPago = await context.Venta.FindAsync(id);
+
+            if(ventaPago != null)
+            {
+                //ventaPago.IdCliente = vent.IdCliente;
+                //ventaPago.IdTipo = vent.IdTipo;
+                ventaPago.Pagado = true;
+                await context.SaveChangesAsync();
+            }
+
+            return Redirect("/Ventas/");
+        }
 
     }
 }

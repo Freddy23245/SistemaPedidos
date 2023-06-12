@@ -14,6 +14,8 @@ public partial class Ventas
     [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
     public DateTime Fecha { get; set; }
 
+    public bool Pagado { get; set; }
+
     public virtual Cliente IdClienteNavigation { get; set; } = null!;
 
     public virtual Tipo IdTipoNavigation { get; set; } = null!;

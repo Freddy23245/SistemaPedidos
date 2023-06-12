@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SistemaPedidos.Models;
 
-public partial class PedidosContext : DbContext
+public partial class SistemaPedidosContext : DbContext
 {
-    public PedidosContext()
+    public SistemaPedidosContext()
     {
     }
 
-    public PedidosContext(DbContextOptions<PedidosContext> options)
+    public SistemaPedidosContext(DbContextOptions<SistemaPedidosContext> options)
         : base(options)
     {
     }

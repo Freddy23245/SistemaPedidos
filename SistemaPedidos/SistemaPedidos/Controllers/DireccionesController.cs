@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SistemaPedidos.Models;
+using System;
+using System.Linq;
 
 namespace SistemaPedidos.Controllers
 {
@@ -15,11 +17,15 @@ namespace SistemaPedidos.Controllers
         public async Task<IActionResult> Index()
         {
 
+            //var cliVent = await context.Venta.Where(x => x.Pagado == false).Select(x => new { x.IdCliente }).ToListAsync();
+            //int item = cliVent.Count;
+        
+
 
             var cusDir = await context.Clientes.Select(x => new {x.IdCliente,NombreCliente = x.Nombre +"  "+x.Apellido}).ToListAsync();
 
             var id = 0;
-           var dir = await context.Direccions.Include(x => x.IdClienteNavigation).OrderBy(z=>z.Horario).ToListAsync();
+           var dir = await context.Direccions.Where(z=>z.Entregado == false).Include(x => x.IdClienteNavigation).OrderBy(z=>z.Horario).ToListAsync();
             Direccion direc = new Direccion();
             ViewBag.Direccion = dir;
             ViewBag.CliDire = cusDir;

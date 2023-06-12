@@ -19,7 +19,11 @@
             </select>
             <span asp-validation-for="Item1.IdTipo" class="text-danger"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group mt-3">
+            <input  class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                PAGADO
+            </label>
         </div>
 
     </div>
@@ -88,6 +92,7 @@
                     <td>@pedido.Cantidad</td>
                     <td>@pedido.PrecioUnitario</td>
                     <td>@Math.Round(pedido.PrecioUnitario * pedido.Cantidad)</td>
+                  
                     <td><a asp-action="EliminarPedido" onclick="return confirm('¿Desea eliminar el Registro?')" asp-controller="Ventas" asp-route-id="@pedido.IdPedido" class="btn btn-danger">Eliminar</a></td>
                 </tr>
             }
