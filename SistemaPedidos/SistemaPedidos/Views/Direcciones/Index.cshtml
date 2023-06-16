@@ -1,6 +1,7 @@
 ﻿@model Direccion
+<button class="btn btn-success mb-3" id="OpenModal" data-toggle="modal" data-target="#myModal">Agregar Direccion de entrega</button>
 <div class="row">
-    <button class="btn btn-success mb-3" id="OpenModal" data-toggle="modal" data-target="#myModal">Agregar Direccion de entrega</button>
+    
     <div class="table-responsive">
         <table class="table table-bordered ">
             <thead>
@@ -10,7 +11,7 @@
                     <th>Fecha</th>
                     <th>Hora</th>
                     <th>Entregado</th>
-                    <th colspan="2">Acciones</th>
+                    <th colspan="3">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,9 +22,19 @@
                         <td>@direccion.Nombre</td>
                         <td>@direccion.Fecha.ToString("dd/MM/yyyy")</td>
                         <td>@direccion.Horario.ToString(@"hh\:mm")</td>
-                        <td>@direccion.Entregado</td>
-                        <td><a asp-action="Modificar" asp-controller="Direcciones" asp-route-id="@direccion.IdDireccion" class="btn btn-primary fa fa-pencil">Editar</a></td>
-                        <td><a asp-action="Eliminar" onclick="return confirm('¿Desea eliminar el Registro?')" asp-controller="Direcciones" asp-route-id="@direccion.IdDireccion" class="btn btn-danger">Eliminar</a></td>
+                @*        <td>@direccion.Entregado  </td>*@
+                        @if (direccion.Entregado)
+                        {
+                            <td><strong>Entregado</strong></td>
+                          
+                        }else
+                        {
+                            <td><strong>No Entregado</strong></td>
+                            <td><a asp-action="Entregado" asp-controller="Direcciones" asp-route-id="@direccion.IdDireccion" class="btn btn-success">Entregado</a></td>
+                            <td><a asp-action="Modificar" asp-controller="Direcciones" asp-route-id="@direccion.IdDireccion" class="btn btn-primary fa fa-pencil">Editar</a></td>
+                            <td><a asp-action="Eliminar" onclick="return confirm('¿Desea eliminar el Registro?')" asp-controller="Direcciones" asp-route-id="@direccion.IdDireccion" class="btn btn-danger">Eliminar</a></td>
+                        }
+                            
                     </tr>
                 }
             </tbody>

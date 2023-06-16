@@ -7,6 +7,7 @@ namespace SistemaPedidos.Models;
 public partial class Ventas
 {
     public int IdVenta { get; set; }
+
     [Required(ErrorMessage = "Cliente Requerido")]
     public int IdCliente { get; set; }
     [Required(ErrorMessage = "Tipo de Comprobante Requerido")]

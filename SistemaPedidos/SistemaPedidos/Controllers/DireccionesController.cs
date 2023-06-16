@@ -17,14 +17,10 @@ namespace SistemaPedidos.Controllers
         public async Task<IActionResult> Index()
         {
 
-            //var cliVent = await context.Venta.Where(x => x.Pagado == false).Select(x => new { x.IdCliente }).ToListAsync();
-            //int item = cliVent.Count;
-        
+            var idsClientes = await context.Venta.Where(v=>v.Pagado ==false).Select(v=>v.IdCliente).Distinct().ToListAsync();
 
+            var cusDir = await context.Clientes.Where(x=>idsClientes.Contains(x.IdCliente)).Select(x => new {x.IdCliente,NombreCliente = x.Nombre +"  "+x.Apellido}).ToListAsync();
 
-            var cusDir = await context.Clientes.Select(x => new {x.IdCliente,NombreCliente = x.Nombre +"  "+x.Apellido}).ToListAsync();
-
-            var id = 0;
            var dir = await context.Direccions.Where(z=>z.Entregado == false).Include(x => x.IdClienteNavigation).OrderBy(z=>z.Horario).ToListAsync();
             Direccion direc = new Direccion();
             ViewBag.Direccion = dir;
@@ -71,6 +67,19 @@ namespace SistemaPedidos.Controllers
                 context.SaveChanges();
                 return Redirect("/Direcciones/");
             }
+        }
+
+        public async Task<IActionResult> Entregado(int id)
+        {
+            var Entregas = await context.Direccions.FindAsync(id);
+
+            if (Entregas != null)
+            {
+                Entregas.Entregado = true;
+                await context.SaveChangesAsync();
+            }
+
+            return Redirect("/Direcciones/");
         }
     }
 }

@@ -1,47 +1,50 @@
 ﻿@model Ventas
 <a class="btn btn-success mb-3" asp-action="Nuevo" asp-controller="Ventas">Nueva Venta</a>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Cliente</th>
-            <th>Tipo</th>
-            <th>Fecha</th>
-            <th>Total a Pagar</th>
-            <th>Pagado</th>
-            <th colspan="3">Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Ventas venta in ViewBag.Ventas)
-        {
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td>@venta.IdClienteNavigation.Nombre  @venta.IdClienteNavigation.Apellido</td>
-                <td>@venta.IdTipoNavigation.Nombre</td>
-                <td>@venta.Fecha.ToString("dd/MM/yyyy")</td>
-                <td>$@Math.Round(@venta.Pedidos.Select(x=> (x.Cantidad * x.PrecioUnitario)).DefaultIfEmpty(0).Sum(),2)</td>
-                @if (venta.Pagado)
-                {
-                    <td><strong>Pagado</strong></td>
-                }else
-                {
-                    <td><strong>No Pagado</strong></td>
-                    <td><a asp-action="Pagado" asp-controller="Ventas" asp-route-id="@venta.IdVenta" class="btn btn-success fa fa-pencil">Pagado</a></td>
-                }
-              
-
-               
-                <td><a asp-action="Modificar" asp-controller="Ventas" asp-route-id="@venta.IdVenta" class="btn btn-primary">Ver Detalle</a></td>
-              
-              
-                @if (Math.Round(@venta.Pedidos.Select(x => (x.Cantidad * x.PrecioUnitario)).DefaultIfEmpty(0).Sum(), 2) <= 0)
-                {
-                    <td><a asp-action="Eliminar" onclick="return confirm('¿Desea eliminar el Registro?')" asp-controller="Ventas" asp-route-id="@venta.IdVenta" class="btn btn-danger">Eliminar</a></td>
-                }
-               
+                <th>Cliente</th>
+                <th>Tipo</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Pagado</th>
+                <th colspan="3">Acciones</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (Ventas venta in ViewBag.Ventas)
+            {
+                <tr>
+                    <td>@venta.IdClienteNavigation.Nombre  @venta.IdClienteNavigation.Apellido</td>
+                    <td>@venta.IdTipoNavigation.Nombre</td>
+                    <td>@venta.Fecha.ToString("dd/MM/yyyy")</td>
+                    <td>$@Math.Round(@venta.Pedidos.Select(x=> (x.Cantidad * x.PrecioUnitario)).DefaultIfEmpty(0).Sum(),2)</td>
+                    @if (venta.Pagado)
+                    {
+                        <td><strong>Pagado</strong></td>
+                    }
+                    else
+                    {
+                        <td><strong>No Pagado</strong></td>
+                        <td><a asp-action="Pagado" asp-controller="Ventas" asp-route-id="@venta.IdVenta" class="btn btn-success fa fa-pencil">Pagado</a></td>
+                    }
+
+
+
+                    <td><a asp-action="Modificar" asp-controller="Ventas" asp-route-id="@venta.IdVenta" class="btn btn-primary">Ver Detalle</a></td>
+
+
+                    @if (Math.Round(@venta.Pedidos.Select(x => (x.Cantidad * x.PrecioUnitario)).DefaultIfEmpty(0).Sum(), 2) <= 0)
+                    {
+                        <td><a asp-action="Eliminar" onclick="return confirm('¿Desea eliminar el Registro?')" asp-controller="Ventas" asp-route-id="@venta.IdVenta" class="btn btn-danger">Eliminar</a></td>
+                    }
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 @section Scripts{
     <script>
         $(function () {

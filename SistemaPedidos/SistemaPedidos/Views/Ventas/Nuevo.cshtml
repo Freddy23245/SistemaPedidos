@@ -33,25 +33,37 @@
 
 </form>
 <hr />
+
 <form method="post" asp-action="SetPedidos" asp-controller="Ventas" id="SetPedidos">
     <div class="row">
         <input type="hidden" asp-for="Item2.IdVenta" />
         <div class="form-group">
             <label>Producto</label>
             <select asp-for="Item2.IdProducto" id="select-productos" asp-items="@(new SelectList(ViewBag.Productos,"IdProducto","NombreProducto"))" class="form-control">
-                <option value="">Seleccione un Producto...</option>
+                @if(ViewBag.Productos == null)
+                {
+                    <option value="">Sin Stock de Productos...</option>
+                }else
+                {
+                    <option value="">Seleccione un Producto...</option>
+                }
             </select>
             <span asp-validation-for="Item2.IdProducto" class="text-danger"></span>
         </div>
 
         <div class="form-group col-md-6">
             <label>Cantidad</label>
-            <input type="number" class="form-control" asp-for="Item2.Cantidad" min="0" />
+            <input type="number" id="CantProd" class="form-control" asp-for="Item2.Cantidad" min="1" />
             <span asp-validation-for="Item2.Cantidad" class="text-danger"></span>
         </div>
         <div class="form-group col-md-6">
             <label>Stock</label>
             <input type="text" id="StockProd" placeholder="Stock" class="form-control" disabled />
+        </div>
+        <div class="form-group col-md-6">
+            <label>Talle</label>
+            <input type="text" id="TalleProd" class="form-control" disabled />
+            
         </div>
         <div class="form-group col-md-6">
             <label>Precio Unitario</label>

@@ -58,12 +58,14 @@ public partial class PedidosContext : DbContext
 
         modelBuilder.Entity<Direccion>(entity =>
         {
-            entity.HasKey(e => e.IdDireccion);
+            entity.HasKey(e => e.IdDireccion).HasName("PK__Direccio__25C35D073F12FCC1");
 
             entity.ToTable("Direccion");
 
             entity.Property(e => e.IdDireccion).HasColumnName("id_direccion");
-            entity.Property(e => e.Entregado).HasColumnName("entregado");
+            entity.Property(e => e.Entregado)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("entregado");
             entity.Property(e => e.Fecha)
                 .HasColumnType("date")
                 .HasColumnName("fecha");
@@ -153,9 +155,13 @@ public partial class PedidosContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("nombre");
             entity.Property(e => e.Precio)
-                .HasColumnType("decimal(12, 2)")
+                .HasColumnType("money")
                 .HasColumnName("precio");
             entity.Property(e => e.Stock).HasColumnName("stock");
+            entity.Property(e => e.Talle)
+                .HasMaxLength(5)
+                .IsUnicode(false)
+                .HasColumnName("talle");
 
             entity.HasOne(d => d.IdMarcaNavigation).WithMany(p => p.Productos)
                 .HasForeignKey(d => d.IdMarca)
@@ -178,7 +184,7 @@ public partial class PedidosContext : DbContext
 
         modelBuilder.Entity<Ventas>(entity =>
         {
-            entity.HasKey(e => e.IdVenta).HasName("PK__Venta__459533BFB00320AE");
+            entity.HasKey(e => e.IdVenta).HasName("PK__Venta__459533BF5E1BE1AB");
 
             entity.Property(e => e.IdVenta).HasColumnName("id_venta");
             entity.Property(e => e.Fecha)
@@ -187,7 +193,9 @@ public partial class PedidosContext : DbContext
                 .HasColumnName("fecha");
             entity.Property(e => e.IdCliente).HasColumnName("id_cliente");
             entity.Property(e => e.IdTipo).HasColumnName("id_tipo");
-            entity.Property(e => e.Pagado).HasColumnName("pagado");
+            entity.Property(e => e.Pagado)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("pagado");
 
             entity.HasOne(d => d.IdClienteNavigation).WithMany(p => p.Venta)
                 .HasForeignKey(d => d.IdCliente)

@@ -40,8 +40,10 @@ namespace SistemaPedidos.Controllers
             ViewBag.Tipos = tipo;
             ViewBag.Clientes = cust;
 
-            ViewBag.Productos = await context.Productos.Select(x => new { x.IdProducto, NombreProducto = x.Nombre + " - " + x.IdMarcaNavigation.Nombre }).ToListAsync();
-            if(id != null)
+            var prodd = await context.Productos.Where(x=>x.Stock > 0).Select(x => new { x.IdProducto, NombreProducto = x.Nombre + " - " + x.IdMarcaNavigation.Nombre + " - " +x.Talle}).ToListAsync();
+            
+            ViewBag.Productos = prodd;
+            if (id != null)
                 ViewBag.Pedido = await context.Pedidos.Include(p => p.IdProductoNavigation).Where(x => x.IdVenta == id.Value).ToListAsync();
             Tuple<Ventas, Pedido> Model = new Tuple<Ventas, Pedido>(Venta, new Pedido());
            

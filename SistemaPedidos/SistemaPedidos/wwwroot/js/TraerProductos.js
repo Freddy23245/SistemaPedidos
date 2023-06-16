@@ -8,6 +8,8 @@
             console.log(data);
             $("#StockProd").val(data.stock);
             $("#PrecioProd").val(data.precio);
+            $('#TalleProd').val(data.talle);
+            $('#CantProd').val(1);
         },
         error: function (error) {
             console.log(error);

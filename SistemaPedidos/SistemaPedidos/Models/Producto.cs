@@ -15,6 +15,8 @@ public partial class Producto
 
     public string Modelo { get; set; } = null!;
 
+    public string Talle { get; set; } = null!;
+
     public string? Descripcion { get; set; }
 
     public decimal Precio { get; set; }

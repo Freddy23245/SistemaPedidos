@@ -15,7 +15,7 @@ public partial class Direccion
 
     public DateTime Fecha { get; set; }
 
-    public bool? Entregado { get; set; }
+    public bool Entregado { get; set; }
 
     public virtual Cliente IdClienteNavigation { get; set; } = null!;
 }
