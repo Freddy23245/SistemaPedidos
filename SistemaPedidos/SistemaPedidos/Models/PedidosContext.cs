@@ -155,8 +155,9 @@ public partial class PedidosContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("nombre");
             entity.Property(e => e.Precio)
-                .HasColumnType("money")
+                .HasColumnType("decimal(18, 2)")
                 .HasColumnName("precio");
+            entity.Property(e => e.PrecioCompra).HasColumnName("precioCompra");
             entity.Property(e => e.Stock).HasColumnName("stock");
             entity.Property(e => e.Talle)
                 .HasMaxLength(5)

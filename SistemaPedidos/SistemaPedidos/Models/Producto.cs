@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SistemaPedidos.Models;
 
@@ -18,6 +19,10 @@ public partial class Producto
     public string Talle { get; set; } = null!;
 
     public string? Descripcion { get; set; }
+    [DataType(DataType.Currency)]
+
+//[DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
+    public double PrecioCompra { get; set; }
 
     public decimal Precio { get; set; }
 

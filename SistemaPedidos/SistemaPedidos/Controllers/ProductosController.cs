@@ -16,7 +16,7 @@ namespace SistemaPedidos.Controllers
         public async Task<IActionResult> Index()
         {
             var marcas = await context.Marcas.ToListAsync();
-            var Prod = await context.Productos.Include(x=>x.IdMarcaNavigation).ToListAsync();
+            var Prod = await context.Productos.Include(x => x.IdMarcaNavigation).ToListAsync();
             Producto Product = new Producto();
             ViewBag.Productos = Prod;
             ViewBag.Marcas = marcas;
@@ -29,7 +29,12 @@ namespace SistemaPedidos.Controllers
             var prod = await context.Productos.Where(x => x.IdProducto == Prod1.IdProducto).AnyAsync();
 
             if (!prod)
-                context.Productos.Add(Prod1);
+            {
+        
+                    context.Productos.Add(Prod1);
+             
+            }
+           
             else
             {
                 context.Productos.Attach(Prod1);
@@ -53,7 +58,7 @@ namespace SistemaPedidos.Controllers
         {
             var Product = await context.Productos.FindAsync(id);
 
-            if(Product == null)
+            if (Product == null)
                 return StatusCode(404);
             else
             {

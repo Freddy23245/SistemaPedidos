@@ -82,33 +82,35 @@
 </form>
 @if (ViewBag.Pedido != null)
 {
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Descripcion</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Total</th>
-                <th colspan="1">Accion</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (Pedido pedido in ViewBag.Pedido)
-            {
+   <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-             
-                    <td> @pedido.IdProductoNavigation.Nombre</td>
-                    <td>@pedido.IdProductoNavigation.Descripcion</td>
-                    <td>@pedido.Cantidad</td>
-                    <td>@pedido.PrecioUnitario</td>
-                    <td>@Math.Round(pedido.PrecioUnitario * pedido.Cantidad)</td>
-                  
-                    <td><a asp-action="EliminarPedido" onclick="return confirm('¿Desea eliminar el Registro?')" asp-controller="Ventas" asp-route-id="@pedido.IdPedido" class="btn btn-danger">Eliminar</a></td>
+                    <th>Producto</th>
+                    <th>Descripcion</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                    <th colspan="1">Accion</th>
                 </tr>
-            }
+            </thead>
+            <tbody>
 
-        </tbody>
-    </table>
+                @foreach (Pedido pedido in ViewBag.Pedido)
+                {
+                    <tr>
+
+                        <td> @pedido.IdProductoNavigation.Nombre</td>
+                        <td>@pedido.IdProductoNavigation.Descripcion</td>
+                        <td>@pedido.Cantidad</td>
+                        <td>@pedido.PrecioUnitario</td>
+                        <td>@Math.Round(pedido.PrecioUnitario * pedido.Cantidad)</td>
+
+                        <td><a asp-action="EliminarPedido" onclick="return confirm('¿Desea eliminar el Registro?')" asp-controller="Ventas" asp-route-id="@pedido.IdPedido" class="btn btn-danger">Eliminar</a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+   </div>
 }

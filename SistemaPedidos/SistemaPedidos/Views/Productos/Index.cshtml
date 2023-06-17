@@ -1,4 +1,5 @@
-﻿@model Producto
+﻿@using System.Globalization;
+@model Producto
 <a class="btn btn-success col-md-3 mb-3" id="OpenModal">Agregar Producto</a>
 <div class="table-responsive">
     <div class="container">
@@ -12,6 +13,7 @@
                     <th>Modelo</th>
                     <th>Talle</th>
                     <th>Decripcion</th>
+                    <th>Precio Compra</th>
                     <th>Precio</th>
                     <th>Stock</th>
                     <th>Imagen</th>
@@ -19,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (Producto Prod in ViewBag.Productos)
+                @foreach (Producto Prod in ViewBag.Productos) 
                 {
                     <tr>
                         <td>@Prod.Nombre</td>
@@ -28,7 +30,10 @@
                         <td>@Prod.Modelo</td>
                         <td>@Prod.Talle</td>
                         <td>@Prod.Descripcion</td>
-                        <td>@Prod.Precio</td>
+                        <td>
+                            $@Prod.PrecioCompra.ToString("00.00")
+                        </td>
+                        <td>$@Prod.Precio.ToString("00.00")</td>
                         <td>@Prod.Stock</td>
                         <td>Imagen</td>
                         <td><a asp-action="Modificar" asp-controller="Productos" asp-route-id="@Prod.IdProducto" class="btn btn-primary">Editar</a></td>
@@ -86,8 +91,13 @@
                                 <span asp-validation-for="Descripcion" class="text-danger"></span>
                             </div>
                             <div class="form-group">
+                                <label>Precio Compra</label>
+                                <input asp-for="PrecioCompra" id="PrecioCompra" asp-format=" {0:0.00}" class="form-control" />
+                                <span asp-validation-for="PrecioCompra" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
                                 <label>Precio</label>
-                                <input asp-for="Precio" class="form-control" value="0" />
+                                <input asp-for="Precio" class="form-control"  />
                                 <span asp-validation-for="Precio" class="text-danger"></span>
                             </div>
                             <div class="form-group">
@@ -100,7 +110,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-success" >Guardar</button>
+                            <button type="submit" id="guardar" class="btn btn-success" >Guardar</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         </div>
                     </form>
@@ -115,6 +125,9 @@
 
     @section Scripts{
         <script>
+          
+
+         
             $(function () {
                 $('#OpenModal').click(function () {
                     $('#myModal').modal('show');
