@@ -164,13 +164,14 @@ public partial class PedidosContext : DbContext
             entity.Property(e => e.IdProducto).HasColumnName("id_producto");
             entity.Property(e => e.IdVenta).HasColumnName("id_venta");
             entity.Property(e => e.PrecioUnitario)
-                .HasColumnType("decimal(12, 2)")
+                .HasColumnType("decimal(18, 2)")
                 .HasColumnName("precio_unitario");
             entity.Property(e => e.Seña)
                 .HasDefaultValueSql("((0))")
+                .HasColumnType("decimal(18, 2)")
                 .HasColumnName("seña");
             entity.Property(e => e.Total)
-                .HasColumnType("decimal(12, 2)")
+                .HasColumnType("decimal(18, 2)")
                 .HasColumnName("total");
 
             entity.HasOne(d => d.IdProductoNavigation).WithMany(p => p.Pedidos)

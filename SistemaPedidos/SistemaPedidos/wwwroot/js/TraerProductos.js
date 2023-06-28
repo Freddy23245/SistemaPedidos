@@ -6,8 +6,10 @@
         data: { id: idProducto },
         success: function (data) {
             console.log(data);
+
+
             $("#StockProd").val(data.stock);
-            $("#PrecioProd").val(data.precio);
+            $("#PrecioProd").val(format(data.precio));
             $('#TalleProd').val(data.talle);
             $('#CantProd').val(1);
         },

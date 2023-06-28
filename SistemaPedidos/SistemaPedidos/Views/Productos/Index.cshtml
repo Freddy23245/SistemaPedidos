@@ -31,9 +31,9 @@
                         <td>@Prod.Talle</td>
                         <td>@Prod.Descripcion</td>
                         <td>
-                            @String.Format("{0:#,0.00}", Prod.PrecioCompra)
+                            $@String.Format("{0:#,0.00}", Prod.PrecioCompra)
                         </td>
-                        <td>@String.Format("{0:#,0.00}", Prod.Precio)</td>
+                        <td>$@String.Format("{0:#,0.00}", Prod.Precio)</td>
                         <td>@Prod.Stock</td>
                         <td>Imagen</td>
                         <td><a asp-action="Modificar" asp-controller="Productos" asp-route-id="@Prod.IdProducto" class="btn btn-primary">Editar</a></td>

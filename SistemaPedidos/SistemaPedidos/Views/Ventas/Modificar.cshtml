@@ -1,1 +1,139 @@
-﻿<partial name="~/Views/Ventas/Nuevo.cshtml"></partial>
+﻿@*<partial name="~/Views/Ventas/Nuevo.cshtml"></partial>*@
+
+@model Tuple<Ventas,Pedido>
+
+<form method="post" asp-action="SetVentas" asp-controller="Ventas" id="SetVentas">
+    <div class="row">
+        <input type="hidden" asp-for="Item1.IdVenta" />
+
+
+        <div class="form-group">
+            <label>Cliente</label>
+            <select asp-for="Item1.IdCliente" asp-items="@(new SelectList(ViewBag.Clientes,"IdCliente","Nombre"))" class="form-control">
+                <option value="">Seleccione un Cliente...</option>
+            </select>
+            <span asp-validation-for="Item1.IdCliente" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Tipo Comprobante</label>
+            <select asp-for="Item1.IdTipo" asp-items="@(new SelectList(ViewBag.Tipos,"IdTipo","Nombre"))" class="form-control">
+                <option value="">Seleccione un Tipo de Comprobante...</option>
+            </select>
+            <span asp-validation-for="Item1.IdTipo" class="text-danger"></span>
+        </div>
+        <div class="form-group mt-3">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                PAGADO
+            </label>
+        </div>
+
+    </div>
+</form>
+<hr />
+
+<form method="post" asp-action="SetPedidos" asp-controller="Ventas" id="SetPedidos">
+    <div class="row">
+        <input type="hidden" asp-for="Item2.IdVenta" />
+        <div class="form-group">
+            <label>Producto</label>
+            <select asp-for="Item2.IdProducto" id="select-productos" asp-items="@(new SelectList(ViewBag.Productos,"IdProducto","NombreProducto"))" class="form-control">
+                @if (ViewBag.Productos == null)
+                {
+                    <option value="">Sin Stock de Productos...</option>
+                }
+                else
+                {
+                    <option value="">Seleccione un Producto...</option>
+                }
+            </select>
+            <span asp-validation-for="Item2.IdProducto" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label>Cantidad</label>
+            <input type="number" id="CantProd" class="form-control" asp-for="Item2.Cantidad" min="1" />
+            <span asp-validation-for="Item2.Cantidad" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Stock</label>
+            <input type="text" id="StockProd" placeholder="Stock" class="form-control" disabled />
+        </div>
+        <div class="form-group col-md-6">
+            <label>Talle</label>
+            <input type="text" id="TalleProd" class="form-control" disabled />
+
+        </div>
+        <div class="form-group col-md-6">
+            <label>Precio Unitario</label>
+            <input type="text" id="PrecioProd" asp-for="Item2.PrecioUnitario" class="form-control" step="Any" />
+            <span asp-validation-for="Item2.PrecioUnitario" class="text-danger"></span>
+        </div>
+
+    </div>
+    <br />
+    <button type="submit" id="btn-Enviar" class="btn btn-success">Guardar</button>
+    <a href="/Ventas/" class="btn btn-secondary">Cerrar</a>
+
+    <input type="hidden" asp-for="Item2.Total" value="" />
+</form>
+@if (ViewBag.Pedido != null)
+{
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Descripcion</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                    <th colspan="1">Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (Pedido pedido in ViewBag.Pedido)
+                {
+                    <tr>
+
+                        <td> @pedido.IdProductoNavigation.Nombre</td>
+                        <td>@pedido.IdProductoNavigation.Descripcion</td>
+                        <td>@pedido.Cantidad</td>
+                        <td>$@String.Format("{0:#,0.00}", pedido.PrecioUnitario)</td>
+                        <td>$@String.Format("{0:#,0.00}", pedido.PrecioUnitario * pedido.Cantidad)</td>
+
+                        <td><a asp-action="EliminarPedido" onclick="return confirm('¿Desea eliminar el Registro?')" asp-controller="Ventas" asp-route-id="@pedido.IdPedido" class="btn btn-danger">Eliminar</a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+}
+@section Scripts {
+
+    <script src="~/Scripts/globalize.js"></script>
+    <script src="~/Scripts/globalize.culture.fr-FR.js"></script>
+    <script>
+        //Esto Permite resolver el problema de los numeros decimales
+        $.validator.methods.number = function (value, element) {
+            return this.optional(element) ||
+                !isNaN(Globalize.parseFloat(value));
+        }
+        $(document).ready(function () {
+            Globalize.culture('fr-FR');
+        });
+    </script>
+    <script>
+        jQuery.extend(jQuery.validator.methods, {
+            range: function (value, element, param) {
+                //Use the Globalization plugin to parse the value
+                var val = $.global.parseFloat(value);
+                return this.optional(element) || (
+                    val >= param[0] && val <= param[1]);
+            }
+        });
+
+    </script>
+}

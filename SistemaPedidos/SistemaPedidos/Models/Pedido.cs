@@ -19,7 +19,7 @@ public partial class Pedido
 
     public decimal? Total { get; set; }
 
-    public double? Seña { get; set; }
+    public decimal? Seña { get; set; }
 
     public virtual Producto IdProductoNavigation { get; set; } = null!;
 
