@@ -17,6 +17,10 @@ public partial class PedidosContext : DbContext
 
     public virtual DbSet<Cliente> Clientes { get; set; }
 
+    public virtual DbSet<Compra> Compras { get; set; }
+
+    public virtual DbSet<DetalleCompra> DetalleCompras { get; set; }
+
     public virtual DbSet<Direccion> Direccions { get; set; }
 
     public virtual DbSet<Marca> Marcas { get; set; }
@@ -24,6 +28,8 @@ public partial class PedidosContext : DbContext
     public virtual DbSet<Pedido> Pedidos { get; set; }
 
     public virtual DbSet<Producto> Productos { get; set; }
+
+    public virtual DbSet<Proveedore> Proveedores { get; set; }
 
     public virtual DbSet<Tipo> Tipos { get; set; }
 
@@ -54,6 +60,54 @@ public partial class PedidosContext : DbContext
                 .HasMaxLength(10)
                 .IsUnicode(false)
                 .HasColumnName("telefono");
+        });
+
+        modelBuilder.Entity<Compra>(entity =>
+        {
+            entity.HasKey(e => e.IdCompra).HasName("PK__Compras__C4BAA6046ECD0D8D");
+
+            entity.Property(e => e.IdCompra).HasColumnName("id_compra");
+            entity.Property(e => e.Fecha)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("date")
+                .HasColumnName("fecha");
+            entity.Property(e => e.IdProveedor).HasColumnName("id_proveedor");
+            entity.Property(e => e.NumeroCompra).HasColumnName("numeroCompra");
+
+            entity.HasOne(d => d.IdProveedorNavigation).WithMany(p => p.Compras)
+                .HasForeignKey(d => d.IdProveedor)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Compras_Proveedores");
+        });
+
+        modelBuilder.Entity<DetalleCompra>(entity =>
+        {
+            entity.HasKey(e => e.IdDetalleCompra).HasName("PK__DetalleC__4D844B130DA31AC6");
+
+            entity.Property(e => e.IdDetalleCompra).HasColumnName("id_DetalleCompra");
+            entity.Property(e => e.Cantidad).HasColumnName("cantidad");
+            entity.Property(e => e.Fecha)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("date")
+                .HasColumnName("fecha");
+            entity.Property(e => e.IdCompra).HasColumnName("id_compra");
+            entity.Property(e => e.IdProducto).HasColumnName("id_producto");
+            entity.Property(e => e.PrecioUnitario)
+                .HasColumnType("decimal(12, 2)")
+                .HasColumnName("precio_unitario");
+            entity.Property(e => e.Total)
+                .HasComputedColumnSql("([precio_unitario]*[cantidad])", false)
+                .HasColumnType("decimal(23, 2)");
+
+            entity.HasOne(d => d.IdCompraNavigation).WithMany(p => p.DetalleCompras)
+                .HasForeignKey(d => d.IdCompra)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_DetalleCompras_Compras");
+
+            entity.HasOne(d => d.IdProductoNavigation).WithMany(p => p.DetalleCompras)
+                .HasForeignKey(d => d.IdProducto)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_DetalleCompras_Producto");
         });
 
         modelBuilder.Entity<Direccion>(entity =>
@@ -112,6 +166,9 @@ public partial class PedidosContext : DbContext
             entity.Property(e => e.PrecioUnitario)
                 .HasColumnType("decimal(12, 2)")
                 .HasColumnName("precio_unitario");
+            entity.Property(e => e.Seña)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("seña");
             entity.Property(e => e.Total)
                 .HasColumnType("decimal(12, 2)")
                 .HasColumnName("total");
@@ -157,7 +214,9 @@ public partial class PedidosContext : DbContext
             entity.Property(e => e.Precio)
                 .HasColumnType("decimal(18, 2)")
                 .HasColumnName("precio");
-            entity.Property(e => e.PrecioCompra).HasColumnName("precioCompra");
+            entity.Property(e => e.PrecioCompra)
+                .HasColumnType("decimal(18, 2)")
+                .HasColumnName("precioCompra");
             entity.Property(e => e.Stock).HasColumnName("stock");
             entity.Property(e => e.Talle)
                 .HasMaxLength(5)
@@ -168,6 +227,25 @@ public partial class PedidosContext : DbContext
                 .HasForeignKey(d => d.IdMarca)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Producto_Marca");
+        });
+
+        modelBuilder.Entity<Proveedore>(entity =>
+        {
+            entity.HasKey(e => e.IdProveedor).HasName("PK__Proveedo__8D3DFE28107EE189");
+
+            entity.Property(e => e.IdProveedor).HasColumnName("id_proveedor");
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("nombre");
+            entity.Property(e => e.Telefono)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("telefono");
+            entity.Property(e => e.Ubicacion)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("ubicacion");
         });
 
         modelBuilder.Entity<Tipo>(entity =>

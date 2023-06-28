@@ -31,9 +31,9 @@
                         <td>@Prod.Talle</td>
                         <td>@Prod.Descripcion</td>
                         <td>
-                            $@Prod.PrecioCompra.ToString("00.00")
+                            @String.Format("{0:#,0.00}", Prod.PrecioCompra)
                         </td>
-                        <td>$@Prod.Precio.ToString("00.00")</td>
+                        <td>@String.Format("{0:#,0.00}", Prod.Precio)</td>
                         <td>@Prod.Stock</td>
                         <td>Imagen</td>
                         <td><a asp-action="Modificar" asp-controller="Productos" asp-route-id="@Prod.IdProducto" class="btn btn-primary">Editar</a></td>
@@ -55,7 +55,7 @@
                     <h4 class="modal-title">Agregar Cliente</h4>
                 </div>
                 <div class="modal-body">
-                    <form method="post" asp-action="AgregarProducto" asp-controller="Productos">
+                    <form method="post" asp-action="AgregarProducto" asp-controller="Productos" enctype="multipart/form-data">
                         <div class="row">
                             <input type="hidden" asp-for="IdProducto" />
                             <div class="form-group">
@@ -92,12 +92,12 @@
                             </div>
                             <div class="form-group">
                                 <label>Precio Compra</label>
-                                <input asp-for="PrecioCompra" id="PrecioCompra" asp-format=" {0:0.00}" class="form-control" />
+                                <input type="text" asp-for="PrecioCompra" id="PrecioCompra" step="Any" class="form-control" />
                                 <span asp-validation-for="PrecioCompra" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label>Precio</label>
-                                <input asp-for="Precio" class="form-control"  />
+                                <input type="text" asp-for="Precio" class="form-control" step="Any" />
                                 <span asp-validation-for="Precio" class="text-danger"></span>
                             </div>
                             <div class="form-group">
@@ -121,13 +121,12 @@
         </div>
     </div>
 
+    @section Scripts {
 
+        <script src="~/Scripts/globalize.js"></script>
+        <script src="~/Scripts/globalize.culture.fr-FR.js"></script>
 
-    @section Scripts{
         <script>
-          
-
-         
             $(function () {
                 $('#OpenModal').click(function () {
                     $('#myModal').modal('show');
@@ -138,6 +137,27 @@
                     $('#ModalEdit').modal('show');
                 })
             })
+        </script>
+        <script>
+            //Esto Permite resolver el problema de los numeros decimales
+            $.validator.methods.number = function (value, element) {
+                return this.optional(element) ||
+                    !isNaN(Globalize.parseFloat(value));
+            }
+            $(document).ready(function () {
+                Globalize.culture('fr-FR');
+            });
+        </script>
+        <script>
+            jQuery.extend(jQuery.validator.methods, {
+                range: function (value, element, param) {
+                    //Use the Globalization plugin to parse the value
+                    var val = $.global.parseFloat(value);
+                    return this.optional(element) || (
+                        val >= param[0] && val <= param[1]);
+                }
+            });
+
         </script>
     }
 </div>
