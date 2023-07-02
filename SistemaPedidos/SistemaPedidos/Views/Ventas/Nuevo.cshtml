@@ -63,7 +63,7 @@
         </div>
         <div class="form-group col-md-6">
             <label>Precio Unitario</label>
-            <input type="text" id="PrecioProd" asp-for="Item2.PrecioUnitario" class="form-control" step="Any"/>
+            <input type="text" id="PrecioProd" asp-for="Item2.PrecioUnitario" class="form-control"  onfocus="formato()" step="Any"/>
             <span asp-validation-for="Item2.PrecioUnitario" class="text-danger"></span>
         </div>
 
@@ -110,8 +110,8 @@
 }
 @section Scripts {
 
-    <script src="~/Scripts/globalize.js"></script>
-    <script src="~/Scripts/globalize.culture.fr-FR.js"></script>
+ @*   <script src="~/Scripts/globalize.js"></script>
+    <script src="~/Scripts/globalize.culture.fr-FR.js"></script>*@
     <script>
         //Esto Permite resolver el problema de los numeros decimales
         $.validator.methods.number = function (value, element) {
