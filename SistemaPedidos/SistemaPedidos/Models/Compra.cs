@@ -7,7 +7,7 @@ public partial class Compra
 {
     public int IdCompra { get; set; }
 
-    public int IdProveedor { get; set; }
+    public int? IdProveedor { get; set; }
 
     public int? NumeroCompra { get; set; }
 
@@ -15,5 +15,5 @@ public partial class Compra
 
     public virtual ICollection<DetalleCompra> DetalleCompras { get; set; } = new List<DetalleCompra>();
 
-    public virtual Proveedore IdProveedorNavigation { get; set; } = null!;
+    public virtual Proveedore? IdProveedorNavigation { get; set; }
 }

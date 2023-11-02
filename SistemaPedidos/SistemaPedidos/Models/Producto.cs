@@ -17,13 +17,13 @@ public partial class Producto
 
     public string Talle { get; set; } = null!;
 
-    public string? Descripcion { get; set; }
+    public string Descripcion { get; set; } = null!;
 
-    public decimal? PrecioCompra { get; set; }
+    public decimal PrecioCompra { get; set; }
 
     public decimal Precio { get; set; }
 
-    public int? Stock { get; set; }
+    public int Stock { get; set; }
 
     public byte[]? Imagen { get; set; }
 

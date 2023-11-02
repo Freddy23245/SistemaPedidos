@@ -9,9 +9,9 @@ public partial class Proveedore
 
     public string Nombre { get; set; } = null!;
 
-    public string Telefono { get; set; } = null!;
+    public string? Telefono { get; set; }
 
-    public string Ubicacion { get; set; } = null!;
+    public string? Ubicacion { get; set; }
 
     public virtual ICollection<Compra> Compras { get; set; } = new List<Compra>();
 }

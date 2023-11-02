@@ -16,7 +16,7 @@ namespace SistemaPedidos.Controllers
         public async Task<IActionResult> Index()
         {
            
-            var vent = await context.Venta.Include(r=>r.Pedidos).Include(x => x.IdClienteNavigation).Include(t=>t.IdTipoNavigation).ToListAsync();
+            var vent = await context.Ventas.Include(r=>r.Pedidos).Include(x => x.IdClienteNavigation).Include(t=>t.IdTipoNavigation).ToListAsync();
             Ventas xvent = new Ventas();          
             ViewBag.Ventas = vent;
         
@@ -29,7 +29,7 @@ namespace SistemaPedidos.Controllers
         public async Task<IActionResult> Nuevo(int? id)
         {
             var valor = id;
-            var _vent = await context.Venta.FindAsync(id);
+            var _vent = await context.Ventas.FindAsync(id);
             var Venta = new Ventas();
             if (_vent != null)
             {
@@ -52,7 +52,7 @@ namespace SistemaPedidos.Controllers
 
         public async Task<IActionResult> SetVentas([Bind(Prefix = "Item1")] Ventas venta1)
         {
-            var _venta = await context.Venta.FindAsync(venta1.IdVenta);
+            var _venta = await context.Ventas.FindAsync(venta1.IdVenta);
          
             if (_venta == null)
             {
@@ -108,7 +108,7 @@ namespace SistemaPedidos.Controllers
         public async Task<IActionResult> Modificar(int? id)
         {
             var valor = id;
-            var _vent = await context.Venta.FindAsync(id);
+            var _vent = await context.Ventas.FindAsync(id);
             var Venta = new Ventas();
             if (_vent != null)
             {
@@ -128,14 +128,14 @@ namespace SistemaPedidos.Controllers
         }
         public async Task<IActionResult> Eliminar(int id)
         {
-            var VentDelete = await context.Venta.FindAsync(id);
+            var VentDelete = await context.Ventas.FindAsync(id);
             var detVent = await context.Pedidos.Where(x => x.IdVenta == id).AnyAsync();
             if (VentDelete == null || detVent )
             {
                 return StatusCode(404);
             }
             else
-                context.Venta.Remove(VentDelete);
+                context.Ventas.Remove(VentDelete);
             context.SaveChanges();
             return Redirect("/Ventas/");
         }
@@ -158,7 +158,7 @@ namespace SistemaPedidos.Controllers
         public Ventas vent { get; set; }
         public async Task<IActionResult> Pagado(int id)
         {
-            var ventaPago = await context.Venta.FindAsync(id);
+            var ventaPago = await context.Ventas.FindAsync(id);
 
             if(ventaPago != null)
             {

@@ -11,7 +11,7 @@ public partial class DetalleCompra
 
     public int IdProducto { get; set; }
 
-    public DateTime? Fecha { get; set; }
+    public DateTime Fecha { get; set; }
 
     public int Cantidad { get; set; }
 

@@ -17,7 +17,7 @@ namespace SistemaPedidos.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var idsClientes = await context.Venta.Where(v=>v.Pagado ==false).Select(v=>v.IdCliente).Distinct().ToListAsync();
+            var idsClientes = await context.Ventas.Where(v=>v.Pagado ==false).Select(v=>v.IdCliente).Distinct().ToListAsync();
 
             var cusDir = await context.Clientes.Where(x=>idsClientes.Contains(x.IdCliente)).Select(x => new {x.IdCliente,NombreCliente = x.Nombre +"  "+x.Apellido}).ToListAsync();
 

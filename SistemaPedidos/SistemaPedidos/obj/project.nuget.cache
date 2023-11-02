@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mQuEBQFGDxBzY/YUqXRsMtINRadXzyZ7lihP+ehnEo9kpiHfbsy65oK/DmcQ8iXIpmG1icV6samZVgObLXktGg==",
+  "dgSpecHash": "yRQ67RnahYEnQqVBd9OA3SI0CQhKKwuby4UU8gQVaK0KEfpMTngPyCjkyc0nmFqmXDkFlZ9T5tImtDcnkqem4w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Cristian\\Desktop\\Pedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos.csproj",
+  "projectFilePath": "C:\\Users\\Cristian\\Desktop\\Desarrollos\\Pedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Cristian\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Cristian\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

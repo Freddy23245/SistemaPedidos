@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Cristian\\Desktop\\Pedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos.csproj": {}
+    "C:\\Users\\Cristian\\Desktop\\Desarrollos\\Pedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Cristian\\Desktop\\Pedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos.csproj": {
+    "C:\\Users\\Cristian\\Desktop\\Desarrollos\\Pedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cristian\\Desktop\\Pedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos.csproj",
+        "projectUniqueName": "C:\\Users\\Cristian\\Desktop\\Desarrollos\\Pedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos.csproj",
         "projectName": "SistemaPedidos",
-        "projectPath": "C:\\Users\\Cristian\\Desktop\\Pedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos.csproj",
+        "projectPath": "C:\\Users\\Cristian\\Desktop\\Desarrollos\\Pedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos.csproj",
         "packagesPath": "C:\\Users\\Cristian\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cristian\\Desktop\\Pedidos\\SistemaPedidos\\SistemaPedidos\\obj\\",
+        "outputPath": "C:\\Users\\Cristian\\Desktop\\Desarrollos\\Pedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Cristian\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -74,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -9,7 +9,7 @@ public partial class Direccion
 
     public int IdCliente { get; set; }
 
-    public string Nombre { get; set; } = null!;
+    public string? Nombre { get; set; }
 
     public TimeSpan Horario { get; set; }
 
