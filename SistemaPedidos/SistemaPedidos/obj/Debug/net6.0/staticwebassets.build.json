@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "OGQqTcMLZMd9tyAtSdIqZUWY892U7zS71WGMwg0mqQM=",
+  "Hash": "/uQVnTfi5ttnbu4QAboN4Nn7iMYc7n6nrgGuS/hT9BM=",
   "Source": "SistemaPedidos",
   "BasePath": "_content/SistemaPedidos",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Cristian\\Desktop\\Desarrollos\\Pedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos\\wwwroot\\img\\415001.jpg",
+      "SourceId": "SistemaPedidos",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Cristian\\Desktop\\Desarrollos\\Pedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos\\wwwroot\\",
+      "BasePath": "_content/SistemaPedidos",
+      "RelativePath": "img/415001.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\415001.jpg"
     },
     {
       "Identity": "C:\\Users\\Cristian\\Desktop\\Desarrollos\\Pedidos\\SistemaPedidos\\SistemaPedidos\\SistemaPedidos\\wwwroot\\js\\Formato.js",
