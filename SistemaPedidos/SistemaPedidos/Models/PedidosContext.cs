@@ -186,7 +186,9 @@ public partial class PedidosContext : DbContext
         {
             entity.HasKey(e => e.IdVenta);
 
-            entity.Property(e => e.Fecha).HasColumnType("date");
+            entity.Property(e => e.Fecha)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("date");
 
             entity.HasOne(d => d.IdClienteNavigation).WithMany(p => p.Venta)
                 .HasForeignKey(d => d.IdCliente)

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SistemaPedidos.Models;
 using System.Globalization;
-using static System.Collections.Specialized.BitVector32;
+using System.Web;
 
 namespace SistemaPedidos.Controllers
 {
@@ -30,6 +30,7 @@ namespace SistemaPedidos.Controllers
         {
             var prod = await context.Productos.Where(x => x.IdProducto == Prod1.IdProducto).AnyAsync();
             var _producto = await context.Productos.FindAsync(Prod1.IdProducto);
+
             if (_producto == null)
             {
 
@@ -39,8 +40,6 @@ namespace SistemaPedidos.Controllers
             else
             {
 
-
-
                 double.TryParse(Prod1.PrecioCompra.ToString(), out double precioDecimal);
                 var formato = new CultureInfo("es-AR");
                 formato.NumberFormat.CurrencySymbol = "$";
@@ -49,9 +48,6 @@ namespace SistemaPedidos.Controllers
                 CultureInfo.DefaultThreadCurrentCulture = formato;
                 CultureInfo.DefaultThreadCurrentUICulture = formato;
 
-
-
-                //var precio = precioDecimal.ToString("N1");
                 _producto.Nombre = Prod1.Nombre;
                 _producto.IdMarca = Prod1.IdMarca;
                 _producto.Color = Prod1.Color;

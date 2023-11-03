@@ -8,15 +8,16 @@
         @foreach (Producto Prod in ViewBag.Productos)
         {
 
-                <div class="col-md-3 p-0">
-                    <div class="card ">
+                <div class="col-md-3">
+                    <div class="card" style="padding:0;">
                         <img src="~/img/415001.jpg" class="card-img-top" alt="Product 1">
                         <div class="card-body" >
-                            <strong class="card-title"> @Prod.Nombre</strong>
-                            <p class="card-text">Marca: @Prod.IdMarcaNavigation.Nombre</p>
-                            <p class="card-text">Color: @Prod.Color</p>
-                            <p class="card-text">Modelo: @Prod.Modelo</p>
-                            <p class="card-text">Talle: @Prod.Talle</p>
+                            <strong class="card-title" style="margin-bottom:1px;"> @Prod.Nombre</strong>
+                            <p class="card-text" style="margin-bottom:1px;">Marca: @Prod.IdMarcaNavigation.Nombre</p>
+                            <p class="card-text" style="margin-bottom:1px;">Color: @Prod.Color</p>
+                            <p class="card-text" style="margin-bottom:1px;">Modelo: @Prod.Modelo</p>
+                            <p class="card-text" style="margin-bottom:1px;">Talle: @Prod.Talle</p>
+                            <p class="card-text" style="margin-bottom:1px;">Stock: @Prod.Stock</p>
                             <p class="card-text">Descripcion: @Prod.Descripcion</p>
                             <a asp-action="Modificar" asp-controller="Productos" asp-route-id="@Prod.IdProducto" class="btn btn-primary">Editar</a>
                             <a asp-action="Eliminar" onclick="return confirm('¿Desea eliminar el Registro?')" asp-controller="Productos" asp-route-id="@Prod.IdProducto" class="btn btn-danger">Eliminar</a>
@@ -66,7 +67,7 @@
                             <div class="form-group">
                                 <label>Marca</label>
                                 <select asp-for="IdMarca" asp-items="@(new SelectList(ViewBag.Marcas,"IdMarca","Nombre"))" class="form-control">
-                                    <option value="">Selleccione una Marca...</option>
+                                    <option value="">Seleccione una Marca...</option>
                                 </select>
                                 <span asp-validation-for="IdMarca" class="text-danger"></span>
                             </div>

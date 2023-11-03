@@ -168,7 +168,7 @@ namespace SistemaPedidos.Controllers
                 await context.SaveChangesAsync();
             }
 
-            return Redirect("/Ventas/");
+            return Redirect("/Direcciones/"+id);
         }
 
     }
